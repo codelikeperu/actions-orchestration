@@ -1,0 +1,27 @@
+name: tfc-onboarding
+
+on:
+  push:
+      branches:
+            - main  # Rama desde donde se dispara
+jobs:
+  trigger_orchestrator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Orchestrator Workflow
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'onboarding_tfc_cloud.yml',
+              ref: "main", // Rama desde donde se dispara
+              inputs: {
+                project_name: 'APP3',
+                team_name: 'APIM',
+                user_email: 'loayzaascatea@gmail.com'
+                }
+            });
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
