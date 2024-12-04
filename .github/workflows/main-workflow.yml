@@ -3,7 +3,7 @@ name: tfc-onboarding
 on:
   push:
       branches:
-            - main  # Rama desde donde se dispara
+            - tfc-onboarding  # Rama desde donde se dispara
 jobs:
   trigger_orchestrator:
     runs-on: ubuntu-latest
